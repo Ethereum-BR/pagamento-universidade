@@ -11,3 +11,9 @@ Então, mãos à obra! Vamos construir uma aplicação em Ethereum na qual:
 2. Este smart contract só vai permitir o envio de dinheiro para o endereço da faculdade, evitando que ela gaste o dinheiro em outras coisas;
 
 3. O contrato não vai permitir novo envio por parte de Paulo antes de se passarem 30 dias (para que ele não se confunda e envie 2 vezes no mesmo mês);
+
+******************************************************************************************************
+NOTA: 
+Este é um exemplo fictício, para fins didáticos. Ele vai rodar apenas em rede private ou Test-net
+Desencorajamos fortemente o uso do código deste projeto na rede de produção!
+******************************************************************************************************
