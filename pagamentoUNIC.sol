@@ -6,7 +6,7 @@ contract pagamentoUNIC {
   uint dataUltimaTransferencia;
   address proprietario;
   event UnicFoiPaga(address enderecoQueDisparouContrato, address destinatario, uint valor);
-  event SaldoInsuficiente(address enderecoQueDisparouContrato, address destinatario, uint valorATransferir, saldo);
+  event SaldoInsuficiente(address enderecoQueDisparouContrato, address destinatario, uint valorATransferir, uint saldo);
   event UltimaTransferenciaMenor30Dias(address enderecoQueDisparouContrato, address destinatario, uint dataUltimaTransferencia);  
 
   function pagamentoUNIC() public payable {
