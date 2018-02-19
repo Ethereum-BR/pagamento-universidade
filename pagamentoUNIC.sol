@@ -14,16 +14,15 @@ contract pagamentoUNIC {
   }
   
   function transfereParaUNIC() public payable {
-  	address enderecoRemetente = msg.sender;
   	uint valorATransferir = 1 ether;
 
-  	if(this.balance >= valorATransferir) {
+  	if(this.balance < valorATransferir) {
       		SaldoInsuficiente(msg.sender, enderecoUNIC, valorATransferir, this.balance);
       		return;
     	}
 
 	// Se a ultima transferencia foi feita a menos de 30 dias, não permitir nova transferencia  	 
-	if (now >= dataUltimaTransferencia + 30 days) {
+	if (now < dataUltimaTransferencia + 30 days) {
         	UltimaTransferenciaMenor30Dias(msg.sender, enderecoUNIC, dataUltimaTransferencia);
         	return;
     	}
