@@ -13,8 +13,6 @@ contract pagamentoUNIC {
   event UnicFoiPaga(address enderecoQueDisparouContrato, address destinatario, uint valor);
   event SaldoInsuficiente(address enderecoQueDisparouContrato, address destinatario, uint valorATransferir, uint saldo);
   event UltimaTransferenciaMenor30Dias(address enderecoQueDisparouContrato, address destinatario, uint dataUltimaTransferencia);
-  event ApenasProprietarioMudaEnderecoUnic();
-  event ApenasProprietarioMudaValorATransferir();
   event NovoValor(uint valorAlterado);
   event ElementoWhiteList(uint indice, address elemento);
   event ElementoRemovido(address endereco)
@@ -26,24 +24,21 @@ contract pagamentoUNIC {
     enderecoUNIC = 0x8977C1F513ca4C60d331B027911AFd23Aa370557;
   }
 
-  function mudaEnderecoUNIC(address _novoEndereco) public {
-    if (msg.sender == proprietario) {
+  function mudaEnderecoUNIC(address _novoEndereco) public somenteDono {
       enderecoUNIC = _novoEndereco;
-    } else {
-      ApenasProprietarioMudaEnderecoUnic();      
-    }
+   }
+
+  modifier somenteDono() {
+    require(msg.sender == proprietario);
+    _;
   }
 
-  function alteraValorATransferir(uint _novoValor) public {
-    if (msg.sender == proprietario) {
+  function alteraValorATransferir(uint _novoValor) public somenteDono {
       valorATransferir = _novoValor;
       NovoValor(valorATransferir);
-    } else {
-      ApenasProprietarioMudaValorATransferir();      
-    }   
   }
   
-  function adicionaEndereco(address _enderecoAAdicionar) public {
+  function adicionaEndereco(address _enderecoAAdicionar) public somenteDono {
       whiteList.push(_enderecoAAdicionar);
   }
   
