@@ -1,0 +1,46 @@
+<!doctype html>
+	<html>
+		<head>
+				<title>Pagamento Universidade</title>
+				<script src="../Web3_JS/web3.js/dist/web3.min.js"></script>
+				<script type="text/javascript">
+
+					if (typeof web3 !== 'undefined') {
+						web3 = new Web3(web3.currentProvider);
+					} else {
+						  // set the provider you want from Web3.providers
+						  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+					}
+
+					var contract_address = "0xA4f0e4D04759867139Af3ce80743A75F6cD2a92c";
+					var contract_abi = [ { "constant": false, "inputs": [ { "name": "_enderecoAAdicionar", "type": "address" } ], "name": "adicionaEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoEndereco", "type": "address" } ], "name": "mudaEnderecoUNIC", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "listaWhiteList", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_enderecoARemover", "type": "address" } ], "name": "removeEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "enderecoUNIC", "outputs": [ { "name": "", "type": "address", "value": "0x8977c1f513ca4c60d331b027911afd23aa370557" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoValor", "type": "uint256" } ], "name": "alteraValorATransferir", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "transfereParaUNIC", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "autoDestruicao", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [], "payable": true, "stateMutability": "payable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valor", "type": "uint256" } ], "name": "UnicFoiPaga", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valorATransferir", "type": "uint256" }, { "indexed": false, "name": "saldo", "type": "uint256" } ], "name": "SaldoInsuficiente", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "dataUltimaTransferencia", "type": "uint256" } ], "name": "UltimaTransferenciaMenor30Dias", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "valorAlterado", "type": "uint256" } ], "name": "NovoValor", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "indice", "type": "uint256" }, { "indexed": false, "name": "elemento", "type": "address" } ], "name": "ElementoWhiteList", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "endereco", "type": "address" } ], "name": "ElementoRemovido", "type": "event" } ];
+
+					var contract_instance = web3.eth.contract(contract_abi).at(contract_address);
+
+					function obtemSaldo() {
+						document.getElementById("Saldo").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]));;
+					}
+
+					function fazTransferencia() {
+						document.getElementById("transfere") = contract_instance.transfereParaUNIC();
+					}
+
+
+				</script>
+			</head>
+
+			<body>
+
+				<h1>Saldo do contrato:</h1>
+				<button onclick="obtemSaldo()">Obter saldo</button>
+				<span id="Saldo"></span> em Ethers
+
+				<br><br>
+
+				<h1>Transferencia para UNIC:</h1>
+				<button onclick="fazTransferencia()">Executa a transferencia</button>
+				<span id="transfere"></span>
+
+			</body>
+
+		</html>
