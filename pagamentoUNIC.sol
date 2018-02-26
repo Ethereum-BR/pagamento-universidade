@@ -15,7 +15,7 @@ contract pagamentoUNIC {
   event UltimaTransferenciaMenor30Dias(address enderecoQueDisparouContrato, address destinatario, uint dataUltimaTransferencia);
   event NovoValor(uint valorAlterado);
   event ElementoWhiteList(uint indice, address elemento);
-  event ElementoRemovido(address endereco)
+  event ElementoRemovido(address endereco);
 
   function pagamentoUNIC() public payable {
     proprietario = msg.sender;
