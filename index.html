@@ -17,8 +17,26 @@
 
 					var contract_instance = web3.eth.contract(contract_abi).at(contract_address);
 
-					function obtemSaldo() {
-						document.getElementById("Saldo").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1]));;
+					function obtemSaldos() {
+						document.getElementById("Saldo0").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0])).toFixed(2);
+						document.getElementById("Saldo1").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1])).toFixed(2);
+						document.getElementById("Saldo2").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[2])).toFixed(2);
+						document.getElementById("Saldo3").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[3])).toFixed(2);
+						document.getElementById("Contrato0xA4f0").innerText = web3.fromWei(web3.eth.getBalance('0xA4f0e4D04759867139Af3ce80743A75F6cD2a92c')).toFixed(2);
+					}
+
+					function alteraValor(){
+						var valorDigitado = document.getElementById("valor");
+						web3.personal.unlockAccount(web3.eth.accounts[0], 'Minhasenhaexclusiva');
+						contract_instance.alteraValorATransferir(valorDigitado, {from: web3.eth.accounts[0], gas: 2000000}), function(error, result) {
+							if(error) {
+								console.error(error);
+							} else {
+								var txHash = result;
+								console.log(txHash);
+							}
+						}
+
 					}
 
 					function fazTransferencia() {
@@ -31,15 +49,54 @@
 
 			<body>
 
-				<h1>Saldo do contrato:</h1>
-				<button onclick="obtemSaldo()">Obter saldo</button>
-				<span id="Saldo"></span> em Ethers
-
+				<!--              -->
+				<!-- OBTEM SALDOS -->
+				<!--              -->
+				<font face="arial">
+				<b>Saldo das contas</b>
 				<br><br>
+				<table border size="1">
+					<tr bgcolor="lightgrey">
+						<td>Conta</td>
+						<td>Ethers</td>
+					</tr>
+					<tr>
+						<td>Etherbase</td>
+						<td> <span id="Saldo0"></span></td>
+					</tr>
+					<tr>
+						<td>UNIC</td>
+						<td> <span id="Saldo1"></span></td>
+					</tr>
+					<tr>
+						<td>Paulo</td>
+						<td> <span id="Saldo2"></span></td>
+					</tr>
+					<tr>
+						<td>Natalia</td>
+						<td> <span id="Saldo3"></span></td>
+					</tr>
+					<tr>
+						<td>Contrato</td>
+						<td> <span id="Contrato0xA4f0"></span></td>
+					</tr>
+				</table>
 
-				<h1>Transferencia para UNIC:</h1>
-				<button onclick="fazTransferencia()">Executa a transferencia</button>
-				<span id="transfere"></span>
+				<button onclick="obtemSaldos()">Atualizar</button><br>
+				<br><br><br>
+
+
+				<!--              -->
+				<!-- ALTERA VALOR -->
+				<!--              -->
+				<b>Altera Valor a Transferir</b>
+				<br><br>
+				<form>
+					Valor em Ethers <input type = "text" name="valor" size="5" maxlength="5" id="valor">
+					<button onclick="alteraValor()">Enviar</button>
+				</form>
+
+			</font>
 
 			</body>
 
