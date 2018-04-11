@@ -1,22 +1,39 @@
 <!doctype html>
-	<html>
+	<html lang="pt-br">
 		<head>
+				<meta charset="utf-8">
+				<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+				<style>
+					table {border: none;}
+					h1 {
+						font-family: calibri;
+						font-size: 25px;
+						font-weight: bold;
+					}
+					h2 {
+						font-family: calibri;
+						font-size: 15px;
+						font-weight: normal;
+					}
+					h3 {
+						font-family: calibri;
+						font-size: 10px;
+						font-style: normal;
+					}
+
+				</style>
 				<title>Pagamento Universidade</title>
 				<script src="../Web3_JS/web3.js/dist/web3.min.js"></script>
 				<script type="text/javascript">
-
 					if (typeof web3 !== 'undefined') {
 						web3 = new Web3(web3.currentProvider);
 					} else {
-						  // set the provider you want from Web3.providers
 						  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 					}
-
 					var contract_address = "0xA4f0e4D04759867139Af3ce80743A75F6cD2a92c";
 					var contract_abi = [ { "constant": false, "inputs": [ { "name": "_enderecoAAdicionar", "type": "address" } ], "name": "adicionaEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoEndereco", "type": "address" } ], "name": "mudaEnderecoUNIC", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "listaWhiteList", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_enderecoARemover", "type": "address" } ], "name": "removeEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "enderecoUNIC", "outputs": [ { "name": "", "type": "address", "value": "0x8977c1f513ca4c60d331b027911afd23aa370557" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoValor", "type": "uint256" } ], "name": "alteraValorATransferir", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "transfereParaUNIC", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "autoDestruicao", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [], "payable": true, "stateMutability": "payable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valor", "type": "uint256" } ], "name": "UnicFoiPaga", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valorATransferir", "type": "uint256" }, { "indexed": false, "name": "saldo", "type": "uint256" } ], "name": "SaldoInsuficiente", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "dataUltimaTransferencia", "type": "uint256" } ], "name": "UltimaTransferenciaMenor30Dias", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "valorAlterado", "type": "uint256" } ], "name": "NovoValor", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "indice", "type": "uint256" }, { "indexed": false, "name": "elemento", "type": "address" } ], "name": "ElementoWhiteList", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "endereco", "type": "address" } ], "name": "ElementoRemovido", "type": "event" } ];
-
 					var contract_instance = web3.eth.contract(contract_abi).at(contract_address);
-
 					function obtemSaldos() {
 						document.getElementById("Saldo0").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0])).toFixed(2);
 						document.getElementById("Saldo1").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1])).toFixed(2);
@@ -24,7 +41,6 @@
 						document.getElementById("Saldo3").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[3])).toFixed(2);
 						document.getElementById("Contrato0xA4f0").innerText = web3.fromWei(web3.eth.getBalance('0xA4f0e4D04759867139Af3ce80743A75F6cD2a92c')).toFixed(2);
 					}
-
 					function alteraValor(){
 						var valorDigitado = document.getElementById("valor");
 						web3.personal.unlockAccount(web3.eth.accounts[0], 'Minhasenhaexclusiva');
@@ -36,67 +52,117 @@
 								console.log(txHash);
 							}
 						}
-
 					}
-
 					function fazTransferencia() {
 						document.getElementById("transfere") = contract_instance.transfereParaUNIC();
 					}
-
-
 				</script>
 			</head>
 
 			<body>
 
-				<!--              -->
-				<!-- OBTEM SALDOS -->
-				<!--              -->
-				<font face="arial">
-				<b>Saldo das contas</b>
-				<br><br>
-				<table border size="1">
-					<tr bgcolor="lightgrey">
-						<td>Conta</td>
-						<td>Ethers</td>
-					</tr>
+				<center>
+					<h1>Pagamento UNIC via Ethereum</h1>
+				</center>
+				<br />
+				<table width="70%" align="center" bgcolor="#E1E1E1" cellpadding="10">  
 					<tr>
-						<td>Etherbase</td>
-						<td> <span id="Saldo0"></span></td>
-					</tr>
-					<tr>
-						<td>UNIC</td>
-						<td> <span id="Saldo1"></span></td>
-					</tr>
-					<tr>
-						<td>Paulo</td>
-						<td> <span id="Saldo2"></span></td>
-					</tr>
-					<tr>
-						<td>Natalia</td>
-						<td> <span id="Saldo3"></span></td>
-					</tr>
-					<tr>
-						<td>Contrato</td>
-						<td> <span id="Contrato0xA4f0"></span></td>
+						<td valign="top">
+							<!--              -->
+							<!-- OBTEM SALDOS -->
+							<!--              -->
+							<font face="arial">
+							<h2><b>Saldo das contas</b></h2>						
+							<table border size="0" noborder>
+								
+								<tr bgcolor="lightgrey">								
+									<td><font face="calibri" size="2"><b>Conta</b></font></td>
+									<td><font face="calibri" size="2"><b>Ethers</b></font></td>
+								</tr>
+								<tr>
+									<td><font face="calibri" size="2">Etherbase</font></td>
+									<td> <span id="Saldo0"></span></td>
+								</tr>
+								<tr>
+									<td><font face="calibri" size="2">UNIC</font></td>
+									<td> <span id="Saldo1"></span></td>
+								</tr>
+								<tr>
+									<td><font face="calibri" size="2">Paulo</font></td>
+									<td> <span id="Saldo2"></span></td>
+								</tr>
+								<tr>
+									<td><font face="calibri" size="2">Natalia</font></td>
+									<td> <span id="Saldo3"></span></td>
+								</tr>
+								<tr>
+									<td><font face="calibri" size="2">Contrato</font></td>
+									<td><span id="Contrato0xA4f0"></span></td>
+								</tr>
+								<tr>
+									<td colspan="2" align="center">
+										<button onclick="obtemSaldos()">Atualizar</button>
+									</td>
+								</tr>			
+								</font>
+							</table>
+
+						</td>
+						<td valign="top">
+							<h2><b>Valor da mensalidade no contrato: </b> ...... Ethers</h2>
+							<h2><b>Data da última transferência: </b> 99/99/9999</h2>
+							<h2><b>Endereco UNIC: </b>0x0.......</h2>
+						</td>
+						<td valign="top">
+							<h2><b>White List:</b></h2>
+							<h2>0x0.......</h2>
+							<h2>0x0.......</h2>
+							<h2>0x0.......</h2>
+							<h2>0x0.......</h2>
+						</td>
 					</tr>
 				</table>
 
-				<button onclick="obtemSaldos()">Atualizar</button><br>
-				<br><br><br>
+				<br /><br />
+				<table width="70%" align="center" bgcolor="#E1E1E1" cellpadding="10">  
+					<tr>
+						<td>
+							<button type="submit">Fazer a transferência</button>
+							<br /><br /><br /><br />
+							<button type="submit">Destruir o contrato</button>
+						</td>
+						<td>
+							<!--              -->
+							<!-- ALTERA VALOR -->
+							<!--              -->
+							<h2><b>Altera Valor a Transferir</b></h2>							
+							<form name="form_altera_valor">
+								<font face="calibri" size="2">
+									<b>Novo valor da mensalidade: </b><input type = "text" name="valor" size="5" maxlength="5" id="valor"> Ethers
+									<button onclick="alteraValor()">Enviar</button>
+								</font>
+							</form>
+							<br /><br />
+							<!--                  -->
+							<!-- WHITE LIST       -->
+							<!--                  -->
+							<h2><b>White List</b></h2>
+							<form name="form_whitelist_inclui">
+								<font face="calibri" size="2">								
+									<b>Endereço a incluir</b> <input type = "text" name="incluir" size="30" maxlength="30" id="valor">
+									<button onclick="incluiEndereco()">Enviar</button>
+								</font>
+							</form>
+							<form name="form_whitelist_exclui">
+								<font face="calibri" size="2">								
+									<b>Endereço a excluir</b> <input type = "text" name="excluir" size="30" maxlength="30" id="valor">
+									<button onclick="excluiEndereco()">Enviar</button>
+								</font>
+							</form>
 
-
-				<!--              -->
-				<!-- ALTERA VALOR -->
-				<!--              -->
-				<b>Altera Valor a Transferir</b>
-				<br><br>
-				<form>
-					Valor em Ethers <input type = "text" name="valor" size="5" maxlength="5" id="valor">
-					<button onclick="alteraValor()">Enviar</button>
-				</form>
-
-			</font>
+						</td>
+					</tr>
+				</table>
 
 			</body>
 
