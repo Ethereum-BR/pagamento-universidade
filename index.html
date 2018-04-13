@@ -2,8 +2,7 @@
 	<html lang="pt-br">
 		<head>
 				<meta charset="utf-8">
-				<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-
+				<title>Pagamento Universidade</title>		
 				<style>
 					table {border: none;}
 					h1 {
@@ -21,38 +20,103 @@
 						font-size: 10px;
 						font-style: normal;
 					}
-
 				</style>
-				<title>Pagamento Universidade</title>
-				<script src="../Web3_JS/web3.js/dist/web3.min.js"></script>
+
+				<script src="./web3.min.js"></script>
+
 				<script type="text/javascript">
+
 					if (typeof web3 !== 'undefined') {
 						web3 = new Web3(web3.currentProvider);
 					} else {
-						  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+						  web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/mGdmu36Bb59P4SHzFJcp"));
 					}
-					var contract_address = "0xA4f0e4D04759867139Af3ce80743A75F6cD2a92c";
+					var contract_address = "0x1326ee6182f1dfa286fdf85f41b98d2927003fbb";
 					var contract_abi = [ { "constant": false, "inputs": [ { "name": "_enderecoAAdicionar", "type": "address" } ], "name": "adicionaEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoEndereco", "type": "address" } ], "name": "mudaEnderecoUNIC", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "listaWhiteList", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_enderecoARemover", "type": "address" } ], "name": "removeEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "enderecoUNIC", "outputs": [ { "name": "", "type": "address", "value": "0x8977c1f513ca4c60d331b027911afd23aa370557" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoValor", "type": "uint256" } ], "name": "alteraValorATransferir", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "transfereParaUNIC", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "autoDestruicao", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [], "payable": true, "stateMutability": "payable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valor", "type": "uint256" } ], "name": "UnicFoiPaga", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valorATransferir", "type": "uint256" }, { "indexed": false, "name": "saldo", "type": "uint256" } ], "name": "SaldoInsuficiente", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "dataUltimaTransferencia", "type": "uint256" } ], "name": "UltimaTransferenciaMenor30Dias", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "valorAlterado", "type": "uint256" } ], "name": "NovoValor", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "indice", "type": "uint256" }, { "indexed": false, "name": "elemento", "type": "address" } ], "name": "ElementoWhiteList", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "endereco", "type": "address" } ], "name": "ElementoRemovido", "type": "event" } ];
+
 					var contract_instance = web3.eth.contract(contract_abi).at(contract_address);
-					function obtemSaldos() {
-						document.getElementById("Saldo0").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0])).toFixed(2);
-						document.getElementById("Saldo1").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[1])).toFixed(2);
-						document.getElementById("Saldo2").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[2])).toFixed(2);
-						document.getElementById("Saldo3").innerText = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[3])).toFixed(2);
-						document.getElementById("Contrato0xA4f0").innerText = web3.fromWei(web3.eth.getBalance('0xA4f0e4D04759867139Af3ce80743A75F6cD2a92c')).toFixed(2);
+
+					function obtemSaldos() {  
+						// Saldo0
+					    web3.eth.getBalance(
+					        "0x0b89Efe75Fd5bfa26D1ee4c69B0AFD2bedD63748",
+					        function(error, result) {
+					            if (error) {
+					                console.error(error);
+					            } else {
+					                var formatted = web3.fromWei(result).toFixed(2);
+					                document.getElementById("Saldo0").innerText = formatted;
+					            }
+					        }
+					    );
+   						// Saldo1
+					    web3.eth.getBalance(
+					        "0x583031d1113ad414f02576bd6afabfb302140225",
+					        function(error, result) {
+					            if (error) {
+					                console.error(error);
+					            } else {
+					                var formatted = web3.fromWei(result).toFixed(2);
+					                document.getElementById("Saldo1").innerText = formatted;
+					            }
+					        }
+					    );
+   						// Saldo2
+					    web3.eth.getBalance(
+					        "0xdd870fa1b7c4700f2bd7f44238821c26f7392148",
+					        function(error, result) {
+					            if (error) {
+					                console.error(error);
+					            } else {
+					                var formatted = web3.fromWei(result).toFixed(2);
+					                document.getElementById("Saldo2").innerText = formatted;
+					            }
+					        }
+					    );
+
+					}				
+
+					function retornaRede() {
+						web3.version.getNetwork((err, netId) => {
+						  switch (netId) {
+						    case "1":
+						      document.getElementById("rede").innerText = "Main-net";
+						      break
+						    case "2":
+   						      document.getElementById("rede").innerText = "Morden (obsoleta)";
+						      break
+						    case "3":
+   						      document.getElementById("rede").innerText = "Ropsten";
+						      break
+						    case "4":
+   						      document.getElementById("rede").innerText = "Rinkeby";
+						      break
+						    case "42":
+   						      document.getElementById("rede").innerText = "Kovan";
+						      break
+						    default:
+   						      document.getElementById("rede").innerText = "desconhecida";
+						     }
+						  });
 					}
+
 					function alteraValor(){
-						var valorDigitado = document.getElementById("valor");
-						web3.personal.unlockAccount(web3.eth.accounts[0], 'Minhasenhaexclusiva');
-						contract_instance.alteraValorATransferir(valorDigitado, {from: web3.eth.accounts[0], gas: 2000000}), function(error, result) {
+						var valorDigitado = document.getElementById("valor");					
+						contract_instance.alteraValorATransferir(valorDigitado, {from: "0x0b89Efe75Fd5bfa26D1ee4c69B0AFD2bedD63748", gas: 2000000}), function(error, result) {
 							if(error) {
 								console.error(error);
 							} else {
 								var txHash = result;
 								console.log(txHash);
+								return result;
 							}
 						}
 					}
+
+					function obtemValorMensalidade(){
+
+					}
+
 					function fazTransferencia() {
 						document.getElementById("transfere") = contract_instance.transfereParaUNIC();
 					}
@@ -60,9 +124,13 @@
 			</head>
 
 			<body>
-
+				<script>
+					retornaRede();
+ 				</script>
 				<center>
 					<h1>Pagamento UNIC via Ethereum</h1>
+					<br />
+					<h3>Você está conectado na rede Ethereum: <span id="rede"></span></h3>
 				</center>
 				<br />
 				<table width="70%" align="center" bgcolor="#E1E1E1" cellpadding="10">  
@@ -76,31 +144,37 @@
 							<table border size="0" noborder>
 								
 								<tr bgcolor="lightgrey">								
-									<td><font face="calibri" size="2"><b>Conta</b></font></td>
+									<td align="center"><font face="calibri" size="2"><b>Conta</b></font></td>
+									<td><font face="calibri" size="2"><b>Proprietário</b></font></td>
 									<td><font face="calibri" size="2"><b>Ethers</b></font></td>
 								</tr>
 								<tr>
+									<td><font face="calibri" size="2">0x0b89Efe75Fd5bfa26D1ee4c69B0AFD2bedD63748</font></td>
 									<td><font face="calibri" size="2">Etherbase</font></td>
 									<td> <span id="Saldo0"></span></td>
 								</tr>
 								<tr>
+									<td><font face="calibri" size="2">0x583031d1113ad414f02576bd6afabfb302140225</font></td>
 									<td><font face="calibri" size="2">UNIC</font></td>
 									<td> <span id="Saldo1"></span></td>
 								</tr>
 								<tr>
+									<td><font face="calibri" size="2">0xdd870fa1b7c4700f2bd7f44238821c26f7392148</font></td>
 									<td><font face="calibri" size="2">Paulo</font></td>
 									<td> <span id="Saldo2"></span></td>
 								</tr>
 								<tr>
+									<td>&nbsp;</td>
 									<td><font face="calibri" size="2">Natalia</font></td>
 									<td> <span id="Saldo3"></span></td>
 								</tr>
 								<tr>
+									<td>&nbsp;</td>									
 									<td><font face="calibri" size="2">Contrato</font></td>
 									<td><span id="Contrato0xA4f0"></span></td>
 								</tr>
-								<tr>
-									<td colspan="2" align="center">
+								<tr>							
+									<td colspan="3" align="center">
 										<button onclick="obtemSaldos()">Atualizar</button>
 									</td>
 								</tr>			
