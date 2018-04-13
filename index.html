@@ -31,8 +31,9 @@
 					} else {
 						  web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/mGdmu36Bb59P4SHzFJcp"));
 					}
-					var contract_address = "0x1326ee6182f1dfa286fdf85f41b98d2927003fbb";
-					var contract_abi = [ { "constant": false, "inputs": [ { "name": "_enderecoAAdicionar", "type": "address" } ], "name": "adicionaEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoEndereco", "type": "address" } ], "name": "mudaEnderecoUNIC", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "listaWhiteList", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_enderecoARemover", "type": "address" } ], "name": "removeEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "enderecoUNIC", "outputs": [ { "name": "", "type": "address", "value": "0x8977c1f513ca4c60d331b027911afd23aa370557" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoValor", "type": "uint256" } ], "name": "alteraValorATransferir", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "transfereParaUNIC", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "autoDestruicao", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [], "payable": true, "stateMutability": "payable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valor", "type": "uint256" } ], "name": "UnicFoiPaga", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valorATransferir", "type": "uint256" }, { "indexed": false, "name": "saldo", "type": "uint256" } ], "name": "SaldoInsuficiente", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "dataUltimaTransferencia", "type": "uint256" } ], "name": "UltimaTransferenciaMenor30Dias", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "valorAlterado", "type": "uint256" } ], "name": "NovoValor", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "indice", "type": "uint256" }, { "indexed": false, "name": "elemento", "type": "address" } ], "name": "ElementoWhiteList", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "endereco", "type": "address" } ], "name": "ElementoRemovido", "type": "event" } ];
+					var contract_address = "0xdf45be1206fd0ee63befe2a63ad87a6703880a53";
+
+					var contract_abi = [ { "constant": true, "inputs": [], "name": "retornaDataUltimaTransferencia", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_enderecoAAdicionar", "type": "address" } ], "name": "adicionaEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoEndereco", "type": "address" } ], "name": "mudaEnderecoUNIC", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "listaWhiteList", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "retornaEnderecoUnic", "outputs": [ { "name": "", "type": "address", "value": "0x8977c1f513ca4c60d331b027911afd23aa370557" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_enderecoARemover", "type": "address" } ], "name": "removeEndereco", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "enderecoUNIC", "outputs": [ { "name": "", "type": "address", "value": "0x8977c1f513ca4c60d331b027911afd23aa370557" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_novoValor", "type": "uint256" } ], "name": "alteraValorATransferir", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "transfereParaUNIC", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "autoDestruicao", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": true, "inputs": [], "name": "retornaValorMensalidade", "outputs": [ { "name": "", "type": "uint256", "value": "1000000000000000000" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [], "payable": true, "stateMutability": "payable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valor", "type": "uint256" } ], "name": "UnicFoiPaga", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "valorATransferir", "type": "uint256" }, { "indexed": false, "name": "saldo", "type": "uint256" } ], "name": "SaldoInsuficiente", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "enderecoQueDisparouContrato", "type": "address" }, { "indexed": false, "name": "destinatario", "type": "address" }, { "indexed": false, "name": "dataUltimaTransferencia", "type": "uint256" } ], "name": "UltimaTransferenciaMenor30Dias", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "valorAlterado", "type": "uint256" } ], "name": "NovoValor", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "indice", "type": "uint256" }, { "indexed": false, "name": "elemento", "type": "address" } ], "name": "ElementoWhiteList", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "name": "endereco", "type": "address" } ], "name": "ElementoRemovido", "type": "event" } ];
 
 					var contract_instance = web3.eth.contract(contract_abi).at(contract_address);
 
@@ -100,6 +101,16 @@
 						  });
 					}
 
+					function obtemValorMensalidade(){
+						contract_instance.retornaValorMensalidade(),function(error, result) {
+							if(error) {
+								console.error(error);
+							} else {
+   						      	document.getElementById("valorMensalidade").innerText =	result;
+							}												
+						}
+					};
+
 					function alteraValor(){
 						var valorDigitado = document.getElementById("valor");					
 						contract_instance.alteraValorATransferir(valorDigitado, {from: "0x0b89Efe75Fd5bfa26D1ee4c69B0AFD2bedD63748", gas: 2000000}), function(error, result) {
@@ -113,12 +124,18 @@
 						}
 					}
 
-					function obtemValorMensalidade(){
-
-					}
-
 					function fazTransferencia() {
-						document.getElementById("transfere") = contract_instance.transfereParaUNIC();
+
+						contract_instance.alteraValorATransferir(valorDigitado, {from: "0x0b89Efe75Fd5bfa26D1ee4c69B0AFD2bedD63748", gas: 2000000}), function(error, result) {
+							if(error) {
+								console.error(error);
+							} else {
+								var txHash = result;
+								console.log(txHash);
+								return result;
+							}
+						}
+
 					}
 				</script>
 			</head>
@@ -183,7 +200,11 @@
 
 						</td>
 						<td valign="top">
-							<h2><b>Valor da mensalidade no contrato: </b> ...... Ethers</h2>
+							<script async>
+								obtemValorMensalidade();
+							</script>
+
+							<h2><b>Valor da mensalidade no contrato: </b><span id="valorMensalidade"></span> Ethers</h2>
 							<h2><b>Data da última transferência: </b> 99/99/9999</h2>
 							<h2><b>Endereco UNIC: </b>0x0.......</h2>
 						</td>
